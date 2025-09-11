@@ -3,7 +3,8 @@ require('dotenv').config();
 const express     = require('express');
 const bodyParser  = require('body-parser');
 const cors        = require('cors');
-const helmet = require('helmet');
+const helmet      = require('helmet');
+
 const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
 const runner            = require('./test-runner');
@@ -23,6 +24,7 @@ app.use(helmet.contentSecurityPolicy({
     upgradeInsecureRequests: true
   }
 }));
+
 app.use(express.json());
 
 app.use('/public', express.static(process.cwd() + '/public'));
@@ -68,3 +70,4 @@ const listener = app.listen(process.env.PORT || 3000, function () {
 });
 
 module.exports = app; //for testing
+
