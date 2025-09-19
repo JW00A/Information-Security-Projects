@@ -24,7 +24,10 @@ app.use(helmet.noSniff());
 app.use(helmet.xssFilter());
 
 app.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Surrogate-Control', 'no-store');
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
   next();
 });
 
@@ -40,7 +43,10 @@ app.use('/public', express.static(process.cwd() + '/public', {
 }));
 app.use('/assets', express.static(process.cwd() + '/assets', {
   setHeaders: (res) => {
-    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Surrogate-Control', 'no-store');
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
   }
 }));
 
